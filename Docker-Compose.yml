@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=post_pass
+      - POSTGRES_DB=playground
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./log:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  web:
+    ports:
+      - "8080:8080"
+    entrypoint: ["java", "-jar", "App/WAA_Playground-1.0.0.jar"]
+    depends_on:
+      - postgres
+    container_name: web
+    build:
+      context: ./WAA_Playground
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/playground
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=post_pass
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+volumes:
+  postgres-data:
