@@ -1,9 +1,11 @@
 package com.example.waa_playground.entity;
 
+import com.example.waa_playground.repository.PersonRepo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.*;
 import java.util.List;
@@ -32,6 +34,4 @@ public class Person {
     void addAddress(Address address) {
         this.addresses.add(address);
     }
-
-
 }

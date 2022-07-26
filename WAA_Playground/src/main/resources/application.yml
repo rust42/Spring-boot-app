@@ -3,11 +3,11 @@ spring:
     name: product-review-app
   datasource:
     password: post_pass
-    url: jdbc:postgresql://postgres:5432/playground
+    url: jdbc:postgresql://localhost:5432/playground
     username: postgres
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
